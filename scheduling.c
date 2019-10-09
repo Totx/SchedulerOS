@@ -23,8 +23,10 @@ void scheduler(int cpu, int core, int hthread){
             }
             break;
         case RR:
-            if (!computing_engine.cpus[cpu].cores[core].hthreads[hthread].proc->pid == 0){
-                list_append(&ready_queue, &computing_engine.cpus[cpu].cores[core].hthreads[hthread].proc);
+            // If there is program executing that still hasn't finished its task but has used the quantum, it's stored once again in the ready queue
+            if (!computing_engine.cpus[cpu].cores[core].hthreads[hthread].proc->pid == 0 && computing_engine.cpus[cpu].cores[core].hthreads[hthread].proc->cycles > 0){
+                computing_engine.cpus[cpu].cores[core].hthreads[hthread].proc->executed_tick_in_a_row = 0;
+                list_append(&ready_queue, computing_engine.cpus[cpu].cores[core].hthreads[hthread].proc);
             }
             if (process_to_schedule()){
                 list_head(&ready_queue, &proc);
