@@ -1,4 +1,4 @@
-This project contains the implementation of three of the scheduling policies present in Operating Systems. The execution policies for these scheduling policies
+This project contains the implementation of three of the scheduling policies present in Operative Systems. The execution policies for these scheduling policies
 are preemptive and nonpreemptive policies.
 
 FIFO
