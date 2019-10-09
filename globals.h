@@ -7,7 +7,7 @@
 
 extern struct computing_engine_t computing_engine;
 extern list_t allprocs;
-extern list_t ready_queue;
+extern list_t *ready_queue;
 extern configuration_t conf;
 
 #endif

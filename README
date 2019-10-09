@@ -1,0 +1,28 @@
+This project contains the implementation of three of the scheduling policies present in Operating Systems. The execution policies for these scheduling policies
+are preemptive and nonpreemptive policies.
+
+FIFO
+This is a nonpreemptive scheduling policy. It picks the program that has been the most time in the queue every time the CPU has a core with a thread available,
+and executes it until finishing it completely.
+Example: ./sim fifo nonpreemptive processes 1 1 2 1
+
+Round-Robin
+This preemptive scheduling policy consists on setting a maximum number of cycles (a quantum) that a program can use continuously the CPU without being stopped and returned
+to the ready queue.
+Example: ./sim round-robin preemptive processes 1 1 2 1 3
+
+Priorities
+This mode is a preemptive scheduling policy that combines Round-Robin with static priorities, which forces the programs with a greater priority value to be handled
+by the CPU every time its available before the lower priority ones.
+Example: ./sim priority preemptive processesWithPriority 1 1 2 1 3 6
+
+The parameters passed to the program are as follor in order:
+1. scheduling policy
+2. execution policy
+3. file to read the programs (and priorities if the scheduling policy is "priority")
+4. Number of CPUs
+5. Number of cores
+6. Number of threads
+7. Number of gpus
+8. Size of the quantum when a preemptive policy is in use.
+9. The highest priority value available + 1, since if n is the highest priority, then the lists created dynamically are in range of [0,n).

@@ -9,7 +9,7 @@ void create_ready_queue();
 
 void insert_process_ready_queue(struct pcb *proc);
 
-long process_to_schedule();
+long process_to_schedule(int p);
 
 #endif
 

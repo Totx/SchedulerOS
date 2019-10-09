@@ -10,6 +10,7 @@ typedef struct configuration_t{
     int ncores;
     int nhthreads;
     int quantum;
+    int priority_level;
     char *file_name;
     scheduling_policy_t scheduling_policy;
     execution_policy_t execution_policy;

@@ -2,6 +2,7 @@
 #include "scheduling.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 int current_tick = 0;
 
@@ -31,14 +32,12 @@ void start_simulation(){
                             }
                         }
                     } else {
-                        if (conf.scheduling_policy == RR){
-                            if(computing_engine.cpus[i].cores[j].hthreads[k].proc->pid == 0){
-                                scheduler(i, j, k);
-                            } else {
-                                computing_engine.cpus[i].cores[j].hthreads[k].proc->cycles--;
-                                computing_engine.cpus[i].cores[j].hthreads[k].proc->executed_tick_in_a_row ++;
-                                if(computing_engine.cpus[i].cores[j].hthreads[k].proc->cycles == 0 || computing_engine.cpus[i].cores[j].hthreads[k].proc->executed_tick_in_a_row == conf.quantum) scheduler(i, j, k);
-                            }
+                        if(computing_engine.cpus[i].cores[j].hthreads[k].proc->pid == 0){
+                            scheduler(i, j, k);
+                        } else {
+                            computing_engine.cpus[i].cores[j].hthreads[k].proc->cycles--;
+                            computing_engine.cpus[i].cores[j].hthreads[k].proc->executed_tick_in_a_row ++;
+                            if(computing_engine.cpus[i].cores[j].hthreads[k].proc->cycles == 0 || computing_engine.cpus[i].cores[j].hthreads[k].proc->executed_tick_in_a_row == conf.quantum) scheduler(i, j, k);
                         }
                     }
                     if(!computing_engine.cpus[i].cores[j].hthreads[k].proc->pid == 0) active++;
@@ -50,5 +49,6 @@ void start_simulation(){
             printf("All processes have been handled by the system\n");
             exit(0);
         }
+        sleep(1);
     }   
 }
